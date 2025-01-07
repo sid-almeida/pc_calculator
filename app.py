@@ -33,7 +33,7 @@ if choice == "Sobre":
     st.write('**Sobre os Dados**')
     st.write('O dataset utilizado neste trabalho foi desenvolvido por meio da coleta e integração de dados públicos provenientes de diversas fontes. Ele reúne uma série de parâmetros econômicos e macroeconômicos sobre empresas do continente americano, proporcionando uma visão abrangente sobre o desempenho e as características dessas organizações. A combinação dessas informações em um único conjunto de dados permite a análise de tendências econômicas e o comportamento das empresas, possibilitando a aplicação de técnicas avançadas de aprendizado de máquina para prever diversos aspectos relacionados ao seu crescimento e performance no mercado. O dataset abrange variáveis como indicadores financeiros, taxas de crescimento econômico, e outros parâmetros que impactam diretamente o setor empresarial americano.')
     # Adding a button to download the dataset data.csv
-    pre_data = pd.read_csv(https://raw.githubusercontent.com/sid-almeida/pc_calculator/refs/heads/main/data.csv)
+    pre_data = pd.read_csv('https://raw.githubusercontent.com/sid-almeida/pc_calculator/refs/heads/main/data.csv')
     if st.download_button(label = "Baixar Dataset de Teste", data = pre_data.to_csv(index=False), file_name = "data.csv", mime = "text/csv"):
         # Mensagem de sucesso
         st.success('O arquivo foi baixado com sucesso!')
