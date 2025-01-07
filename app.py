@@ -3,14 +3,6 @@ import pandas as pd
 import pickle
 import os
 import joblib
-import requests
-
-# Loaded the pkl archive
-url = 'https://github.com/sid-almeida/pc_calculator/raw/main/model.pkl'
-response = requests.get(url)
-
-with open('model.pkl', 'wb') as f:
-    f.write(response.content)
 
 # Loaded the model.pkl from files
 model = joblib.load('model.pkl')
@@ -21,7 +13,7 @@ pc_label = {0 : 'Nulo', 1 : 'Baixo', 2 : 'Alto', 3 : 'Muito Alto'}
 
 # Create a sidebar header
 with st.sidebar:
-    st.image("https://github.com/sid-almeida/pc_calculator/blob/main/image.png?raw=true", width=250)
+    st.image("image.png", width=250)
     st.title("Potencial de Crescimento")
     choice = st.radio("**Navegação:**", ("Sobre", "Previsão em Lote"))
     st.info('**Nota:** Por favor, esteja ciente de que este aplicativo é destinado exclusivamente para fins educacionais. É fortemente desaconselhável utilizar esta ferramenta para tomar quaisquer decisões financeiras.')
@@ -40,6 +32,17 @@ if choice == "Sobre":
     st.write('---')
     st.write('**Sobre os Dados**')
     st.write('O dataset utilizado neste trabalho foi desenvolvido por meio da coleta e integração de dados públicos provenientes de diversas fontes. Ele reúne uma série de parâmetros econômicos e macroeconômicos sobre empresas do continente americano, proporcionando uma visão abrangente sobre o desempenho e as características dessas organizações. A combinação dessas informações em um único conjunto de dados permite a análise de tendências econômicas e o comportamento das empresas, possibilitando a aplicação de técnicas avançadas de aprendizado de máquina para prever diversos aspectos relacionados ao seu crescimento e performance no mercado. O dataset abrange variáveis como indicadores financeiros, taxas de crescimento econômico, e outros parâmetros que impactam diretamente o setor empresarial americano.')
+    # Adding a button to download the dataset data.csv
+    pre_data = pd.read_csv('data.csv')
+    if st.download_button(label = "Baixar Dataset de Teste", data = pre_data.to_csv(index=False), file_name = "data.csv", mime = "text/csv"):
+        # Mensagem de sucesso
+        st.success('O arquivo foi baixado com sucesso!')
+    else:
+        # Mensagem de erro
+        st.write('-----------')
+        st.info('Clique no botão de Download para baixar o Dataset de Teste!')
+
+
     st.write('---')
 
 if choice == 'Previsão em Lote':
