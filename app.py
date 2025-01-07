@@ -3,9 +3,17 @@ import pandas as pd
 import pickle
 import os
 import joblib
+import requests
+
+# Loaded the pkl archive
+url = 'https://github.com/sid-almeida/pc_calculator/raw/main/model.pkl'
+response = requests.get(url)
+
+with open('model.pkl', 'wb') as f:
+    f.write(response.content)
 
 # Loaded the model.pkl from files
-model = joblib.load('https://github.com/sid-almeida/pc_calculator/blob/main/model.pkl')
+model = joblib.load('model.pkl')
 
 # Criei um discionário com as previsões e número e depois o label que corresponde
 
