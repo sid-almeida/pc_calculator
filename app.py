@@ -3,6 +3,14 @@ import pandas as pd
 import pickle
 import os
 import joblib
+import requests
+
+# Loaded the pkl archive
+url = 'https://github.com/sid-almeida/pc_calculator/raw/main/model.pkl'
+response = requests.get(url)
+
+with open('model.pkl', 'wb') as f:
+    f.write(response.content)
 
 # Loaded the model.pkl from files
 model = joblib.load('model.pkl')
@@ -13,7 +21,7 @@ pc_label = {0 : 'Nulo', 1 : 'Baixo', 2 : 'Alto', 3 : 'Muito Alto'}
 
 # Create a sidebar header
 with st.sidebar:
-    st.image("image.png", width=250)
+    st.image("https://github.com/sid-almeida/pc_calculator/blob/main/image.png?raw=true", width=250)
     st.title("Potencial de Crescimento")
     choice = st.radio("**Navegação:**", ("Sobre", "Previsão em Lote"))
     st.info('**Nota:** Por favor, esteja ciente de que este aplicativo é destinado exclusivamente para fins educacionais. É fortemente desaconselhável utilizar esta ferramenta para tomar quaisquer decisões financeiras.')
