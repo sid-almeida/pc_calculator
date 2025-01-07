@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import os
 import joblib
+import altair as alt
 
 # Loaded the model.pkl from files
 model = joblib.load('model.pkl')
@@ -72,6 +73,21 @@ if choice == 'Previsão em Lote':
             st.write('---')
             st.write('**Dataset Calculado:**')
             st.write(df_pred)
+            # Criei uma simples análise da coluna 'Potencial PC' no altair
+            count_df = df_pred['Potencial PC'].value_counts().reset_index()
+            count_df.columns = ['Potencial PC', 'Count']
+            # Criando o gráfico de barras
+            chart = alt.Chart(count_df).mark_bar().encode(
+                x=alt.X('Potencial PC:N', title='Potencial PC'),
+                y=alt.Y('Count:Q', title='Contagem'),
+                color='Potencial PC:N',
+                tooltip=['Potencial PC', 'Count']
+            ).properties(
+                title='Distribuição de Potencial de Crescimento (PC)'
+            )
+
+            # Exibindo o gráfico no Streamlit
+            st.altair_chart(chart, use_container_width=True)
             # Create a button to download the dataset with the predicted probability of bankruptcy
             if st.download_button(label='Baixar o Dataset Calculado', data=df_pred.to_csv(index=False), file_name='predicted.csv', mime='text/csv'):
                 pass
