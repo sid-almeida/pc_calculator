@@ -9,12 +9,7 @@ import requests
 # Downloaded the model archive via request
 model_url = 'https://github.com/sid-almeida/pc_calculator/blob/main/model.pkl'
 
-def load_model_from_github(url):
-    try:
-        # Faz o download do arquivo do GitHub
-        response = requests.get(url)
-        response.raise_for_status()  # Garante que não houve erro no download
-
+response = requests.get(url)
 
 # Loaded the model.pkl from files
 model = pickle.loads(response.content)
