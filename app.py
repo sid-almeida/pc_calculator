@@ -7,7 +7,7 @@ import altair as alt
 import requests
 
 # Downloaded the model archive via request
-model_url = 'https://github.com/sid-almeida/pc_calculator/blob/main/model.pkl'
+model_url = 'https://github.com/sid-almeida/pc_calculator/raw/refs/heads/main/model.pkl'
 
 response = requests.get(model_url)
 
