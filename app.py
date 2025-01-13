@@ -4,9 +4,20 @@ import pickle
 import os
 import joblib
 import altair as alt
+import requests
+
+# Downloaded the model archive via request
+model_url = 'https://github.com/sid-almeida/pc_calculator/blob/main/model.pkl'
+
+def load_model_from_github(url):
+    try:
+        # Faz o download do arquivo do GitHub
+        response = requests.get(url)
+        response.raise_for_status()  # Garante que não houve erro no download
+
 
 # Loaded the model.pkl from files
-model = joblib.load('model.pkl')
+model = pickle.loads(response.content)
 
 # Criei um discionário com as previsões e número e depois o label que corresponde
 
