@@ -16,7 +16,7 @@ model = pickle.loads(response.content)
 
 # Criei um discionário com as previsões e número e depois o label que corresponde
 
-pc_label = {0 : 'Nulo', 1 : 'Baixo', 2 : 'Alto', 3 : 'Muito Alto'}
+pc_label = {0 : 'Baixo', 1 : 'Médio', 2 : 'Alto', 3 : 'Muito Alto'}
 
 # Create a sidebar header
 with st.sidebar:
